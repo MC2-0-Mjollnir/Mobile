@@ -1,10 +1,11 @@
-import React from 'react';
-import { View, StyleSheet, ImageBackground, Dimensions,Text, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, ImageBackground, Dimensions, Text, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const Active = ({route}) => {
+const Active = ({ route }) => {
     const windowHeight = Dimensions.get('window').height;
     const { projectName, projectDescription } = route.params;
+    const [active, setActive] = useState(false);
     const navigation = useNavigation();
 
     const handleViewTasks = () => {
@@ -17,24 +18,23 @@ const Active = ({route}) => {
                 source={require('../Images/Bg.png')}
                 style={[styles.background, { height: windowHeight }]}
             >
-                <View style={styles.content}> 
+                <View style={styles.content}>
                     <Text style={styles.titre}>{projectName} </Text>
                     <Text style={styles.paragraph}>{projectDescription} </Text>
-                    <View style={styles.imageContainer}> 
+                    <TouchableOpacity onPress={() => setActive(prev => !prev)} style={[styles.imageContainer, { backgroundColor: active ? '#26344F' : '#AAAAAA' }]}>
                         <Image
                             source={require('../Images/icon.png')}
                             style={styles.image}
                         />
-                    </View>
-                    <Text style={styles.titre}> Active </Text>
+                    </TouchableOpacity>
+                    <Text style={styles.titre}> {active ? 'Active' : 'Inactive'} </Text>
 
-                    <View style={styles.currentTask}> 
+                    <View style={[styles.currentTask, { opacity: active ? 1 : 0.25 }]}>
                         <Text> Current Task </Text>
-                        <Text> Working on the Corner N15 </Text>   
+                        <Text> Working on the Corner N15 </Text>
                     </View>
                     <Text style={styles.link} onPress={handleViewTasks}> View All Tasks </Text>
                 </View>
-                
             </ImageBackground>
         </View>
     );
@@ -62,8 +62,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 40,
-        backgroundColor: '#26344F',
-        marginTop: 50,
+        borderRadius: 10, // Optional: Adding border radius for better UI
     },
     image: {
         width: 50,
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
     titre: {
         fontSize: 30,
         color: '#26344F',
-        marginBottom: 10,
+        marginTop: 10,
         textAlign: 'center',
     },
     paragraph: {
