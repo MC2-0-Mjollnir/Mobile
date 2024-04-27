@@ -1,9 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, Dimensions,Text, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Active = ({route}) => {
     const windowHeight = Dimensions.get('window').height;
     const { projectName, projectDescription } = route.params;
+    const navigation = useNavigation();
+
+    const handleViewTasks = () => {
+        navigation.navigate('tasks');
+    }
 
     return (
         <View style={styles.container}>
@@ -21,6 +27,12 @@ const Active = ({route}) => {
                         />
                     </View>
                     <Text style={styles.titre}> Active </Text>
+
+                    <View style={styles.currentTask}> 
+                        <Text> Current Task </Text>
+                        <Text> Working on the Corner N15 </Text>   
+                    </View>
+                    <Text style={styles.link} onPress={handleViewTasks}> View All Tasks </Text>
                 </View>
                 
             </ImageBackground>
@@ -66,6 +78,25 @@ const styles = StyleSheet.create({
     paragraph: {
         color: '#8A8A8A',
     },
+
+    currentTask: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        alignContent: 'center',
+        marginTop: 75,
+        backgroundColor: 'white',
+        paddingVertical: 15,
+        paddingHorizontal: 40,
+        color: '#26344F',
+        borderColor: '#26344F',
+        borderWidth: 1,
+    },
+    link: {
+        color: '#26344F',
+        marginTop: 20,
+        textDecorationLine: 'underline',
+    }
 });
 
 export default Active;

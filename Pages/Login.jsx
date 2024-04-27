@@ -20,6 +20,7 @@ const Login = () => {
             Alert.alert('Success', 'Login successful');
             navigation.navigate('Projects');
         } catch (error) {
+            console.log(error.message)
             Alert.alert('Error', error?.response?.data?.message ?? 'Something went wrong');
         }
     };
