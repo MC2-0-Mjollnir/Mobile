@@ -19,7 +19,7 @@ const Projects = ({ projects, isLoading }) => {
         try {
             await API.post('projects/join/'+projectCode+'/', { code: projectCode })
             Alert.alert('Success', 'Project joined!');
-            navigation.navigate('project');
+            navigation.navigate('Projects');
         } catch (error) {
             Alert.alert('Error', error?.response?.data?.message ?? 'Something went wrong');         
         }

@@ -11,14 +11,14 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     const navigateToSignup = () => {
-        navigation.navigate('signup');
+        navigation.navigate('Signup');
     };
 
     const handleLogin = async () => {
         try {
             await API.post('users/login/', { email, password });
             Alert.alert('Success', 'Login successful');
-            navigation.navigate('project');
+            navigation.navigate('Projects');
         } catch (error) {
             Alert.alert('Error', error?.response?.data?.message ?? 'Something went wrong');
         }

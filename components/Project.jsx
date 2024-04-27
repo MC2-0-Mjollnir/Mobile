@@ -6,7 +6,7 @@ const Project = ({ name, description }) => {
     const navigation = useNavigation(); // Initialisez la navigation
 
     const navigateToActive = () => {
-        navigation.navigate('active', { projectName: name, projectDescription: description });
+        navigation.navigate('Active', { projectName: name, projectDescription: description });
     };
 
     return (

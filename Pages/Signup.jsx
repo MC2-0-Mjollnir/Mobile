@@ -12,14 +12,14 @@ const Register = () => {
     const [password, setPassword] = useState('');
 
     const navigateToLogin = () => {
-        navigation.navigate('login');
+        navigation.navigate('Login');
     };
 
     const handleRegister = async () => {
         try {
             await API.post('users/register/', { email, password, firstName, lastName });
             Alert.alert('Success', 'Register successful');
-            navigation.navigate('project');
+            navigation.navigate('Projects');
         } catch (error) {
             Alert.alert('Error', error?.response?.data?.message ?? 'Something went wrong');
         }
